@@ -5,12 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "viraldzen"
 version = "0.1.0"
-description = "Collect viral Dzen (Дзен) content without a browser"
+description = "Topic-selection: viral Dzen (Дзен) content without a browser"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }
-authors = [{ name = "Артур Хорошев" }]
-keywords = ["dzen", "cursor", "agent-skills", "viral"]
+authors = [{ name = "Иван Олегович Озёрский" }]
+keywords = ["dzen", "cursor", "agent-skills", "viral", "topic-selection"]
 classifiers = [
   "Programming Language :: Python :: 3",
   "License :: OSI Approved :: MIT License",
@@ -19,8 +19,7 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/Horosheff/ViralDzen"
-Issues = "https://github.com/Horosheff/ViralDzen/issues"
+Homepage = "https://k-ai.pro/"
 
 [project.scripts]
 viraldzen = "viraldzen.cli:main"

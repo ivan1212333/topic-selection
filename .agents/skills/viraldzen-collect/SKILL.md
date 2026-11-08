@@ -19,11 +19,7 @@ compatibility: Requires Python 3.11+ and network access to dzen.ru. No third-par
 
 ## Окружение
 
-Перед первым сбором проверь CLI. Если `python3 -m viraldzen -h` не работает:
-
-```bash
-pip install "git+https://github.com/Horosheff/ViralDzen.git"
-```
+Перед первым сбором проверь CLI. Если `python3 -m viraldzen -h` не работает — из корня клона: `pip install -e .` или `./install-skill.sh`.
 
 Из клона репозитория pip не нужен: команды запускай из корня клона. Python 3.11+, сеть до `dzen.ru`.
 

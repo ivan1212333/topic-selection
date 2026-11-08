@@ -1,6 +1,6 @@
 # AGENTS.md
 
-ViralDzen — библиотека: вирусные материалы Дзена по теме, которую назвал человек. Без браузера, без логина в Яндекс.
+Topic-selection (CLI `viraldzen`) — библиотека: вирусные материалы Дзена по теме, которую назвал человек. Без браузера, без логина в Яндекс.
 
 Отвечай по-русски. Плейбук смены — `skills/viraldzen-collect/SKILL.md` (копии: `.cursor/skills/viraldzen-collect/`, `.agents/skills/viraldzen-collect/`). README — людям, сюда не копируй.
 

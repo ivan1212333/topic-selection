@@ -301,15 +301,6 @@ def media_src(stored: str, html_dir: Path) -> str:
         return path.resolve().as_posix()
 
 
-def channel_href(url: object) -> str:
-    text = str(url or "").strip()
-    if not text or "{" in text or "}" in text:
-        return ""
-    if text.startswith("https://dzen.ru/") or text.startswith("http://dzen.ru/"):
-        return text
-    return ""
-
-
 def _cover_src(row: Row, html_dir: Path, *, portable: bool = False) -> str:
     if not portable:
         local = media_src(str(row.get("cover_image_path") or ""), html_dir)
@@ -360,9 +351,7 @@ def merge_rows(groups: Sequence[Sequence[Row]]) -> list[dict[str, object]]:
 def _row_html(row: Row, index: int, html_dir: Path, *, portable: bool = False) -> str:
     title = str(row.get("title") or "Без заголовка")
     topic = str(row.get("topic") or "без темы")
-    url = str(row.get("url") or "")
     channel = str(row.get("channel_name") or "").strip()
-    channel_url = channel_href(row.get("channel_url"))
     cover = _cover_src(row, html_dir, portable=portable)
     views = int(row.get("views") or 0)
     likes = int(row.get("likes") or 0)
@@ -378,20 +367,7 @@ def _row_html(row: Row, index: int, html_dir: Path, *, portable: bool = False) -
         if cover
         else '<div class="ph">нет фото</div>'
     )
-    channel_html = html.escape(channel or "канал не указан")
-    if channel_url:
-        channel_html = (
-            f'<a href="{html.escape(channel_url, quote=True)}" target="_blank" rel="noreferrer">'
-            f"{channel_html}</a>"
-        )
-    title_html = html.escape(title)
-    if url:
-        title_html = (
-            f'<a class="title" href="{html.escape(url, quote=True)}" target="_blank" rel="noreferrer">'
-            f"{title_html}</a>"
-        )
-    else:
-        title_html = f'<span class="title">{title_html}</span>'
+    title_html = f'<span class="title">{html.escape(title)}</span>'
     badge = '<span class="badge">вирус</span>' if viral else '<span class="muted">—</span>'
     gallery = "".join(
         f'<img src="{html.escape(src, quote=True)}" alt="">' for src in _gallery(row, html_dir, portable=portable)
@@ -408,7 +384,7 @@ def _row_html(row: Row, index: int, html_dir: Path, *, portable: bool = False) -
         {cover_html}
         <div>
           {title_html}
-          <div class="meta">{channel_html} · {html.escape(published)}</div>
+          <div class="meta">{html.escape(published)}</div>
         </div>
       </div>
     </td>

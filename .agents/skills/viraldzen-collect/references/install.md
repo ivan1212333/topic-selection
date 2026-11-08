@@ -4,13 +4,7 @@
 
 Из клона репозитория ничего ставить не нужно: `python3 -m viraldzen` работает из корня.
 
-Если скилл скопировали в `~/.cursor/skills/` или поставили через `npx skills add`:
-
-```bash
-pip install "git+https://github.com/Horosheff/ViralDzen.git"
-```
-
-или из локального клона:
+Если скилл скопировали в `~/.cursor/skills/` без открытого клона — установите пакет из локального клона:
 
 ```bash
 pip install -e .

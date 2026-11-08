@@ -1,4 +1,4 @@
 {
-  "name": "ViralDzen",
+  "name": "Topic-selection",
   "install": "python3 -m compileall -q viraldzen tests"
 }
