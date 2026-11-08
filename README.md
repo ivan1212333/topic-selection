@@ -1,7 +1,7 @@
 # 🚀 Topic-selection
 
 <p align="center">
-  <img src="assets/cover.png" alt="Topic-selection Cover" width="100%" />
+  <img src="assets/cover.jpg" alt="Topic-selection Cover" width="100%" />
 </p>
 
 <p align="center">
