@@ -63,7 +63,12 @@
 Откройте корень клона как рабочую папку в Cursor. Скилл `viraldzen-collect` подхватится автоматически.
 
 **Вариант Б — скилл в другой проект:**
-Скопируйте `skills/viraldzen-collect` в каталог скиллов агента или запустите из корня клона:
+Скопируйте папку `skills/viraldzen-collect` в каталог скиллов агента:
+
+- **Cursor:** `~/.cursor/skills/viraldzen-collect` (Windows: `%USERPROFILE%\.cursor\skills\viraldzen-collect`)
+- **Claude Code / Codex:** `~/.agents/skills/viraldzen-collect` или `~/.claude/skills/viraldzen-collect`
+
+Либо не копируйте скилл и работайте из **корня клона** (`python3 -m viraldzen …`), либо сразу выполните **Вариант В**.
 
 **Вариант В — из клона одной командой:**
 ```bash

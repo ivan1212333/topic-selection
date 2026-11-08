@@ -222,7 +222,9 @@ _JS = """
       return Number(b.dataset[key] || 0) - Number(a.dataset[key] || 0);
     });
     const parent = ranked[0] && ranked[0].parentElement;
-    ranked.forEach((block) => parent.appendChild(block));
+    if (parent) {
+      ranked.forEach((block) => parent.appendChild(block));
+    }
     apply();
   });
   document.querySelectorAll(".more").forEach((btn) => {
@@ -287,6 +289,26 @@ def split_paths(value: object) -> list[str]:
     return [part.strip() for part in text.split("|") if part.strip()]
 
 
+def _relative_to_html_dir(path: Path, html_dir: Path) -> str:
+    """Relative POSIX path from html_dir to path (like relative_to(..., walk_up=True), 3.11-safe)."""
+    path = path.resolve()
+    html_dir = html_dir.resolve()
+    try:
+        return path.relative_to(html_dir).as_posix()
+    except ValueError:
+        pass
+    path_parts = path.parts
+    base_parts = html_dir.parts
+    i = 0
+    limit = min(len(path_parts), len(base_parts))
+    while i < limit and path_parts[i] == base_parts[i]:
+        i += 1
+    if i == 0:
+        raise ValueError(f"{path} is not under a common prefix with {html_dir}")
+    rel = [".."] * (len(base_parts) - i) + list(path_parts[i:])
+    return "/".join(rel) if rel else "."
+
+
 def media_src(stored: str, html_dir: Path) -> str:
     if not stored:
         return ""
@@ -296,7 +318,7 @@ def media_src(stored: str, html_dir: Path) -> str:
     if not path.is_file():
         return ""
     try:
-        return path.resolve().relative_to(html_dir.resolve(), walk_up=True).as_posix()
+        return _relative_to_html_dir(path, html_dir)
     except ValueError:
         return path.resolve().as_posix()
 

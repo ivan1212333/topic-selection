@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 from viraldzen.cli import main
-from viraldzen.html_table import export_html, format_int, merge_rows
+from viraldzen.html_table import _relative_to_html_dir, export_html, format_int, merge_rows
 from viraldzen.models import ViralItem
 from viraldzen.store import ItemStore
 
@@ -13,6 +13,17 @@ from viraldzen.store import ItemStore
 class HtmlTableTests(unittest.TestCase):
     def test_format_int_uses_spaces(self) -> None:
         self.assertEqual(format_int(13867), "13 867")
+
+    def test_relative_to_html_dir_walk_up(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            image = root / "images" / "cover.jpg"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"jpeg")
+            html_dir = root / "reports"
+            html_dir.mkdir()
+            rel = _relative_to_html_dir(image, html_dir)
+            self.assertEqual(rel, "../images/cover.jpg")
 
     def test_merge_keeps_higher_views(self) -> None:
         low = {"publication_id": "a", "views": 10, "viral_score": 1, "is_viral": 0}
